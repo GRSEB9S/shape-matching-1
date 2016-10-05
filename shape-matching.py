@@ -101,7 +101,7 @@ class ShapeMatching:
         self.curr_pos, self.curr_vel = self.integrate(pos, self.curr_pos, self.curr_vel, self.goal_pos)
         self.curr_pos, self.curr_vel = self.collisionDetection(self.curr_pos, self.curr_vel)
 
-sm = ShapeMatching(0.0, 5.5, 2.0, 20)
+sm = ShapeMatching(0.0, 15, 4.0, 20)
 
 #################################
 # ANIMATION
@@ -129,20 +129,19 @@ if True:
     curr_pos, = ax.plot(sm.curr_pos[:,0], sm.curr_pos[:,1],'ro')
     goal_pos, = ax.plot(sm.goal_pos[:,0], sm.goal_pos[:,1],'bx')
     curr_com, = ax.plot(sm.curr_com[0], sm.curr_com[1],'bo')
-    patch = plt.Polygon(np.zeros((sm.n,2)), color='b', alpha=0.25)
+    patch = plt.Polygon(np.zeros((sm.n,2)), color='b', alpha=0.5)
     ax.add_patch(patch)
 
     # call the animator. blit=True means only re-draw the parts that have changed.
     anim = animation.FuncAnimation(fig, animate, init_func=init,
-                                   frames=250, interval=50, blit=False)
+                                   frames=500, interval=1, blit=False)
 
-    plt.xlim(-5,5)
-    plt.ylim(-1,20)
-    plt.axhspan(0.0, -1.0, facecolor='0.5', alpha=0.5)
+    plt.xlim(-10,10)
+    plt.ylim(-1,19)
+    plt.axhspan(0.0, -1.0, facecolor='g', alpha=0.5)
     plt.gca().set_aspect('equal', adjustable='box')
-
-    #anim.save('shape-matching.mp4', fps=30, extra_args=['-vcodec', 'libx264'])
-    plt.show()
+    anim.save('shape-matching.mp4', fps=60, extra_args=['-vcodec', 'libx264'])
+    #plt.show()
 
 
 #################################
